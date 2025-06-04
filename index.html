@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pelajari Algoritma Brute Force</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .highlight {
+            animation: pulse 0.5s ease-in-out;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        .array-element {
+            transition: all 0.3s ease;
+        }
+        .checking {
+            background-color: #fbbf24 !important;
+            transform: scale(1.1);
+        }
+        .found {
+            background-color: #10b981 !important;
+        }
+        .not-found {
+            background-color: #ef4444 !important;
+        }
+        .text-element {
+            transition: all 0.3s ease;
+            font-family: monospace;
+        }
+        .pattern-element {
+            transition: all 0.3s ease;
+            font-family: monospace;
+        }
+        .match {
+            background-color: #10b981 !important;
+            color: white;
+        }
+        .mismatch {
+            background-color: #ef4444 !important;
+            color: white;
+        }
+        .current-text {
+            background-color: #fbbf24 !important;
+            color: black;
+        }
+        .current-pattern {
+            background-color: #3b82f6 !important;
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-blue-600 text-white sticky top-0 z-50 shadow-lg">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <h1 class="text-xl font-bold">Algoritma Brute Force</h1>
+                <div class="hidden md:flex space-x-4">
+                    <a href="#home" class="nav-link hover:bg-blue-700 px-3 py-2 rounded">Beranda</a>
+                    <a href="#konsep" class="nav-link hover:bg-blue-700 px-3 py-2 rounded">Konsep</a>
+                    <a href="#visualisasi" class="nav-link hover:bg-blue-700 px-3 py-2 rounded">Visualisasi</a>
+                    <a href="#studi-kasus" class="nav-link hover:bg-blue-700 px-3 py-2 rounded">Studi Kasus</a>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-blue-700">
+            <a href="#home" class="block px-4 py-2 hover:bg-blue-800">Beranda</a>
+            <a href="#konsep" class="block px-4 py-2 hover:bg-blue-800">Konsep</a>
+            <a href="#visualisasi" class="block px-4 py-2 hover:bg-blue-800">Visualisasi</a>
+            <a href="#studi-kasus" class="block px-4 py-2 hover:bg-blue-800">Studi Kasus</a>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="py-16 bg-gradient-to-r from-blue-500 to-purple-600 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl md:text-6xl font-bold mb-6">Pelajari Algoritma Brute Force</h2>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
+                Algoritma Brute Force adalah pendekatan sederhana yang mencoba semua kemungkinan solusi untuk menyelesaikan masalah. 
+                Mari pelajari konsep dasar, visualisasi, dan implementasinya!
+            </p>
+            <div class="bg-white/20 rounded-lg p-8 max-w-2xl mx-auto">
+                <div class="text-6xl mb-4">🔍</div>
+                <p class="text-lg">
+                    "Mencoba semua kemungkinan sampai menemukan jawaban yang benar"
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Konsep Section -->
+    <section id="konsep" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">Apa Itu Algoritma Brute Force?</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <div class="bg-blue-50 p-6 rounded-lg">
+                    <h3 class="text-2xl font-bold mb-4 text-blue-600">Definisi</h3>
+                    <p class="text-gray-700 mb-4">
+                        Brute Force adalah metode penyelesaian masalah yang mencoba semua kemungkinan solusi secara sistematis 
+                        hingga menemukan jawaban yang benar.
+                    </p>
+                </div>
+                
+                <div class="bg-green-50 p-6 rounded-lg">
+                    <h3 class="text-2xl font-bold mb-4 text-green-600">Karakteristik</h3>
+                    <ul class="text-gray-700 space-y-2">
+                        <li>✅ <strong>Sederhana:</strong> Mudah dipahami dan diimplementasikan</li>
+                        <li>✅ <strong>Lengkap:</strong> Selalu menemukan solusi jika ada</li>
+                        <li>❌ <strong>Tidak Efisien:</strong> Membutuhkan waktu lama untuk input besar</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visualisasi Section -->
+    <section id="visualisasi" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">Lihat Cara Kerja Brute Force!</h2>
+            
+            <!-- Contoh 1: Pencarian Angka -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                <h3 class="text-2xl font-bold mb-6 text-blue-600">Contoh 1: Pencarian Angka dalam Array</h3>
+                
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Array Angka (pisahkan dengan koma):</label>
+                        <input type="text" id="arrayInput" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" 
+                               placeholder="Contoh: 5,12,3,8,20" value="5,12,3,8,20">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Angka Target:</label>
+                        <input type="number" id="targetInput" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" 
+                               placeholder="Contoh: 8" value="8">
+                    </div>
+                </div>
+                
+                <div class="flex gap-4 mb-6">
+                    <button id="startVisualization" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">
+                        Mulai Visualisasi
+                    </button>
+                    <button id="resetVisualization" class="bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition-colors">
+                        Reset
+                    </button>
+                </div>
+                
+                <div id="arrayVisualization" class="mb-6">
+                    <!-- Array elements will be displayed here -->
+                </div>
+                
+                <div id="searchStatus" class="text-lg font-medium text-gray-700 mb-4">
+                    Siap untuk memulai pencarian...
+                </div>
+                
+                <div id="searchResult" class="text-xl font-bold">
+                    <!-- Result will be displayed here -->
+                </div>
+            </div>
+
+            <!-- Contoh 2: Menebak Password -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                <h3 class="text-2xl font-bold mb-6 text-purple-600">Contoh 2: Menebak Kata Sandi Sederhana (3 Digit)</h3>
+                
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Kata Sandi Target (3 digit):</label>
+                        <input type="text" id="passwordInput" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500" 
+                               placeholder="Contoh: 123" value="123" maxlength="3" pattern="[0-9]{3}">
+                    </div>
+                    <div class="flex items-end">
+                        <button id="startPasswordCrack" class="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors mr-4">
+                            Mulai Simulasi
+                        </button>
+                        <button id="resetPasswordCrack" class="bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition-colors">
+                            Reset
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6">
+                    <div class="flex">
+                        <div class="ml-3">
+                            <p class="text-sm text-yellow-700">
+                                <strong>Catatan Keamanan:</strong> Ini hanya untuk ilustrasi edukasi. 
+                                Kata sandi nyata harus kompleks dan tidak boleh ditebak dengan brute force!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="passwordStatus" class="text-lg font-medium text-gray-700 mb-4">
+                    Siap untuk memulai simulasi...
+                </div>
+                
+                <div id="passwordAttempt" class="text-2xl font-mono bg-gray-100 p-4 rounded text-center mb-4">
+                    ---
+                </div>
+                
+                <div id="passwordResult" class="text-xl font-bold">
+                    <!-- Result will be displayed here -->
+                </div>
+            </div>
+
+            <!-- Contoh 3: Pencarian Pola dalam Teks -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                <h3 class="text-2xl font-bold mb-6 text-green-600">Contoh 3: Pencarian Pola dalam Teks</h3>
+                
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Teks:</label>
+                        <input type="text" id="textInput" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500" 
+                               placeholder="Contoh: HELLO WORLD" value="HELLO WORLD">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Pola yang dicari:</label>
+                        <input type="text" id="patternInput" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500" 
+                               placeholder="Contoh: WORLD" value="WORLD">
+                    </div>
+                </div>
+                
+                <div class="flex gap-4 mb-6">
+                    <button id="startPatternSearch" class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors">
+                        Mulai Pencarian Pola
+                    </button>
+                    <button id="resetPatternSearch" class="bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition-colors">
+                        Reset
+                    </button>
+                </div>
+                
+                <div class="mb-4">
+                    <div class="text-sm font-medium text-gray-700 mb-2">Teks:</div>
+                    <div id="textVisualization" class="p-4 bg-gray-100 rounded font-mono text-lg tracking-widest">
+                        <!-- Text visualization will be displayed here -->
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <div class="text-sm font-medium text-gray-700 mb-2">Pola:</div>
+                    <div id="patternVisualization" class="p-4 bg-gray-100 rounded font-mono text-lg tracking-widest">
+                        <!-- Pattern visualization will be displayed here -->
+                    </div>
+                </div>
+                
+                <div id="patternStatus" class="text-lg font-medium text-gray-700 mb-4">
+                    Siap untuk memulai pencarian pola...
+                </div>
+                
+                <div id="patternResult" class="text-xl font-bold">
+                    <!-- Result will be displayed here -->
+                </div>
+            </div>
+
+            <!-- Contoh 4: Mengurutkan dengan Selection Sort (Brute Force) -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                <h3 class="text-2xl font-bold mb-6 text-orange-600">Contoh 4: Mengurutkan Array dengan Selection Sort</h3>
+                
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Array Angka (pisahkan dengan koma):</label>
+                    <input type="text" id="sortArrayInput" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500" 
+                           placeholder="Contoh: 64,34,25,12,22,11,90" value="64,34,25,12,22,11,90">
+                </div>
+                
+                <div class="flex gap-4 mb-6">
+                    <button id="startSort" class="bg-orange-600 text-white px-6 py-3 rounded-lg hover:bg-orange-700 transition-colors">
+                        Mulai Pengurutan
+                    </button>
+                    <button id="resetSort" class="bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition-colors">
+                        Reset
+                    </button>
+                </div>
+                
+                <div id="sortVisualization" class="mb-6">
+                    <!-- Sort visualization will be displayed here -->
+                </div>
+                
+                <div id="sortStatus" class="text-lg font-medium text-gray-700 mb-4">
+                    Siap untuk memulai pengurutan...
+                </div>
+                
+                <div id="sortResult" class="text-xl font-bold">
+                    <!-- Result will be displayed here -->
+                </div>
+            </div>
+
+            <!-- Contoh 5: Kombinasi Kata Sandi (Advanced) -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-2xl font-bold mb-6 text-red-600">Contoh 5: Simulasi Kombinasi Karakter (2 karakter)</h3>
+                
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Karakter yang Digunakan:</label>
+                        <select id="charsetSelect" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500">
+                            <option value="0123456789">Angka (0-9)</option>
+                            <option value="ABCDEFGHIJKLMNOPQRSTUVWXYZ">Huruf Besar (A-Z)</option>
+                            <option value="abcdefghijklmnopqrstuvwxyz">Huruf Kecil (a-z)</option>
+                            <option value="0123456789ABCDEF">Hex (0-9, A-F)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Target (2 karakter):</label>
+                        <input type="text" id="comboTarget" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500" 
+                               placeholder="Contoh: 42" value="42" maxlength="2">
+                    </div>
+                </div>
+                
+                <div class="flex gap-4 mb-6">
+                    <button id="startCombo" class="bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition-colors">
+                        Mulai Kombinasi
+                    </button>
+                    <button id="resetCombo" class="bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition-colors">
+                        Reset
+                    </button>
+                </div>
+                
+                <div class="bg-red-50 border-l-4 border-red-400 p-4 mb-6">
+                    <div class="flex">
+                        <div class="ml-3">
+                            <p class="text-sm text-red-700">
+                                <strong>Peringatan:</strong> Ini menunjukkan mengapa password sederhana mudah dipecahkan. 
+                                Gunakan password yang panjang dan kompleks!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <div class="text-sm font-medium text-gray-700 mb-2">Kombinasi Saat Ini:</div>
+                        <div id="currentCombo" class="text-3xl font-mono bg-gray-100 p-4 rounded text-center">
+                            --
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-sm font-medium text-gray-700 mb-2">Total Kemungkinan:</div>
+                        <div id="totalCombos" class="text-2xl font-bold bg-blue-100 p-4 rounded text-center text-blue-600">
+                            0
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="comboStatus" class="text-lg font-medium text-gray-700 mb-4">
+                    Siap untuk memulai simulasi...
+                </div>
+                
+                <div id="comboResult" class="text-xl font-bold">
+                    <!-- Result will be displayed here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Studi Kasus Section -->
+    <section id="studi-kasus" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">Kapan Brute Force Digunakan?</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Contoh Positif -->
+                <div class="bg-green-50 border border-green-200 rounded-lg p-6">
+                    <h3 class="text-2xl font-bold mb-4 text-green-600">✅ Contoh Positif</h3>
+                    <h4 class="text-xl font-semibold mb-3">Pencarian Pola dalam Teks</h4>
+                    <p class="text-gray-700 mb-4">
+                        Brute force cocok untuk mencari pola sederhana dalam teks pendek atau ketika 
+                        kita membutuhkan implementasi yang mudah dipahami.
+                    </p>
+                    
+                    <div class="bg-white p-4 rounded border">
+                        <h5 class="font-semibold mb-2">Contoh Kode:</h5>
+                        <pre class="text-sm bg-gray-800 text-green-400 p-3 rounded overflow-x-auto"><code>function cariPola(teks, pola) {
+    for (let i = 0; i <= teks.length - pola.length; i++) {
+        let cocok = true;
+        for (let j = 0; j < pola.length; j++) {
+            if (teks[i + j] !== pola[j]) {
+                cocok = false;
+                break;
+            }
+        }
+        if (cocok) return i;
+    }
+    return -1;
+}</code></pre>
+                    </div>
+                </div>
+
+                <!-- Contoh Negatif -->
+                <div class="bg-red-50 border border-red-200 rounded-lg p-6">
+                    <h3 class="text-2xl font-bold mb-4 text-red-600">❌ Peringatan Keamanan</h3>
+                    <h4 class="text-xl font-semibold mb-3">Serangan Login Brute Force</h4>
+                    <p class="text-gray-700 mb-4">
+                        Brute force dapat disalahgunakan untuk menyerang sistem login dengan mencoba 
+                        berbagai kombinasi username dan password.
+                    </p>
+                    
+                    <div class="bg-yellow-100 border border-yellow-300 p-4 rounded">
+                        <h5 class="font-semibold text-yellow-800 mb-2">Cara Melindungi Sistem:</h5>
+                        <ul class="text-yellow-700 space-y-1">
+                            <li>• Implementasi rate limiting</li>
+                            <li>• Menggunakan CAPTCHA</li>
+                            <li>• Kebijakan password yang kuat</li>
+                            <li>• Two-factor authentication</li>
+                            <li>• Monitoring dan logging</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-lg mb-2">Website Edukasi Algoritma Brute Force</p>
+            <p class="text-gray-400">Dibuat untuk membantu pemula memahami konsep algoritma dasar</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                }
+            });
+        });
+
+        // Global variables for controlling animations
+        let searchInProgress = false;
+        let passwordCrackInProgress = false;
+        let patternSearchInProgress = false;
+        let sortInProgress = false;
+        let comboInProgress = false;
+
+        // Array Search Visualization
+        function createArrayVisualization(array) {
+            const container = document.getElementById('arrayVisualization');
+            container.innerHTML = '';
+            
+            array.forEach((num, index) => {
+                const element = document.createElement('div');
+                element.className = 'array-element inline-block bg-blue-200 border-2 border-blue-300 p-4 m-2 rounded text-center font-bold text-lg';
+                element.id = `element-${index}`;
+                element.textContent = num;
+                container.appendChild(element);
+            });
+        }
+
+        async function bruteForceSearch(array, target) {
+            const statusEl = document.getElementById('searchStatus');
+            const resultEl = document.getElementById('searchResult');
+            
+            for (let i = 0; i < array.length; i++) {
+                if (!searchInProgress) break;
+                
+                // Highlight current element
+                const currentEl = document.getElementById(`element-${i}`);
+                currentEl.classList.add('checking');
+                
+                statusEl.textContent = `Mencari... Memeriksa angka ${array[i]} (langkah ${i + 1})`;
+                
+                // Wait for animation
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                
+                if (array[i] == target) {
+                    currentEl.classList.remove('checking');
+                    currentEl.classList.add('found');
+                    statusEl.textContent = `Selesai! Angka ${target} ditemukan.`;
+                    resultEl.innerHTML = `<span class="text-green-600">✅ Angka ${target} ditemukan di posisi ${i} setelah ${i + 1} langkah!</span>`;
+                    searchInProgress = false;
+                    return i;
+                }
+                
+                currentEl.classList.remove('checking');
+                currentEl.classList.add('not-found');
+            }
+            
+            if (searchInProgress) {
+                statusEl.textContent = `Selesai! Angka ${target} tidak ditemukan.`;
+                resultEl.innerHTML = `<span class="text-red-600">❌ Angka ${target} tidak ditemukan setelah ${array.length} langkah!</span>`;
+            }
+            
+            searchInProgress = false;
+            return -1;
+        }
+
+        document.getElementById('startVisualization').addEventListener('click', function() {
+            if (searchInProgress) return;
+            
+            const arrayInput = document.getElementById('arrayInput').value;
+            const targetInput = document.getElementById('targetInput').value;
+            
+            if (!arrayInput || !targetInput) {
+                alert('Harap isi array dan target!');
+                return;
+            }
+            
+            try {
+                const array = arrayInput.split(',').map(num => parseInt(num.trim()));
+                const target = parseInt(targetInput);
+                
+                if (array.some(isNaN) || isNaN(target)) {
+                    alert('Harap masukkan angka yang valid!');
+                    return;
+                }
+                
+                searchInProgress = true;
+                document.getElementById('searchResult').innerHTML = '';
+                createArrayVisualization(array);
+                bruteForceSearch(array, target);
+                
+            } catch (error) {
+                alert('Format input tidak valid!');
+            }
+        });
+
+        document.getElementById('resetVisualization').addEventListener('click', function() {
+            searchInProgress = false;
+            document.getElementById('arrayVisualization').innerHTML = '';
+            document.getElementById('searchStatus').textContent = 'Siap untuk memulai pencarian...';
+            document.getElementById('searchResult').innerHTML = '';
+        });
+
+        // Password Cracking Simulation
+        async function bruteForcePassword(target) {
+            const statusEl = document.getElementById('passwordStatus');
+            const attemptEl = document.getElementById('passwordAttempt');
+            const resultEl = document.getElementById('passwordResult');
+            
+            let attempts = 0;
+            
+            for (let i = 0; i <= 999; i++) {
+                if (!passwordCrackInProgress) break;
+                
+                attempts++;
+                const guess = i.toString().padStart(3, '0');
+                
+                attemptEl.textContent = guess;
+                statusEl.textContent = `Mencoba kombinasi... (Percobaan ${attempts})`;
+                
+                // Wait for animation
+                await new Promise(resolve => setTimeout(resolve, 100));
+                
+                if (guess === target) {
+                    statusEl.textContent = `Kata sandi ditemukan!`;
+                    resultEl.innerHTML = `<span class="text-green-600">✅ Kata sandi "${target}" ditemukan setelah ${attempts} percobaan!</span>`;
+                    passwordCrackInProgress = false;
+                    return guess;
+                }
+            }
+            
+            if (passwordCrackInProgress) {
+                statusEl.textContent = `Kata sandi tidak ditemukan.`;
+                resultEl.innerHTML = `<span class="text-red-600">❌ Kata sandi tidak ditemukan setelah ${attempts} percobaan!</span>`;
+            }
+            
+            passwordCrackInProgress = false;
+            return null;
+        }
+
+        document.getElementById('startPasswordCrack').addEventListener('click', function() {
+            if (passwordCrackInProgress) return;
+            
+            const passwordInput = document.getElementById('passwordInput').value;
+            
+            if (!passwordInput || passwordInput.length !== 3 || !/^\d{3}$/.test(passwordInput)) {
+                alert('Harap masukkan kata sandi 3 digit yang valid!');
+                return;
+            }
+            
+            passwordCrackInProgress = true;
+            document.getElementById('passwordResult').innerHTML = '';
+            bruteForcePassword(passwordInput);
+        });
+
+        document.getElementById('resetPasswordCrack').addEventListener('click', function() {
+            passwordCrackInProgress = false;
+            document.getElementById('passwordStatus').textContent = 'Siap untuk memulai simulasi...';
+            document.getElementById('passwordAttempt').textContent = '---';
+            document.getElementById('passwordResult').innerHTML = '';
+        });
+
+        // Pattern Search Visualization
+        function createTextVisualization(text) {
+            const container = document.getElementById('textVisualization');
+            container.innerHTML = '';
+            
+            for (let i = 0; i < text.length; i++) {
+                const element = document.createElement('span');
+                element.className = 'text-element inline-block p-1 m-0.5 border border-gray-300 bg-white';
+                element.id = `text-${i}`;
+                element.textContent = text[i] === ' ' ? '␣' : text[i];
+                container.appendChild(element);
+            }
+        }
+
+        function createPatternVisualization(pattern) {
+            const container = document.getElementById('patternVisualization');
+            container.innerHTML = '';
+            
+            for (let i = 0; i < pattern.length; i++) {
+                const element = document.createElement('span');
+                element.className = 'pattern-element inline-block p-1 m-0.5 border border-blue-300 bg-blue-100';
+                element.id = `pattern-${i}`;
+                element.textContent = pattern[i] === ' ' ? '␣' : pattern[i];
+                container.appendChild(element);
+            }
+        }
+
+        async function bruteForcePatternSearch(text, pattern) {
+            const statusEl = document.getElementById('patternStatus');
+            const resultEl = document.getElementById('patternResult');
+            
+            for (let i = 0; i <= text.length - pattern.length; i++) {
+                if (!patternSearchInProgress) break;
+                
+                statusEl.textContent = `Memeriksa posisi ${i}...`;
+                
+                // Highlight current position in text
+                for (let k = 0; k < text.length; k++) {
+                    const textEl = document.getElementById(`text-${k}`);
+                    textEl.classList.remove('current-text', 'match', 'mismatch');
+                    if (k >= i && k < i + pattern.length) {
+                        textEl.classList.add('current-text');
+                    }
+                }
+                
+                // Reset pattern highlighting
+                for (let k = 0; k < pattern.length; k++) {
+                    const patternEl = document.getElementById(`pattern-${k}`);
+                    patternEl.classList.remove('current-pattern', 'match', 'mismatch');
+                    patternEl.classList.add('current-pattern');
+                }
+                
+                await new Promise(resolve => setTimeout(resolve, 800));
+                
+                let isMatch = true;
+                
+                // Check character by character
+                for (let j = 0; j < pattern.length; j++) {
+                    const textEl = document.getElementById(`text-${i + j}`);
+                    const patternEl = document.getElementById(`pattern-${j}`);
+                    
+                    if (text[i + j] === pattern[j]) {
+                        textEl.classList.add('match');
+                        patternEl.classList.add('match');
+                    } else {
+                        textEl.classList.add('mismatch');
+                        patternEl.classList.add('mismatch');
+                        isMatch = false;
+                    }
+                    
+                    await new Promise(resolve => setTimeout(resolve, 400));
+                }
+                
+                if (isMatch) {
+                    statusEl.textContent = `Pola ditemukan di posisi ${i}!`;
+                    resultEl.innerHTML = `<span class="text-green-600">✅ Pola "${pattern}" ditemukan di posisi ${i}!</span>`;
+                    patternSearchInProgress = false;
+                    return i;
+                }
+                
+                await new Promise(resolve => setTimeout(resolve, 500));
+            }
+            
+            if (patternSearchInProgress) {
+                statusEl.textContent = `Pola tidak ditemukan.`;
+                resultEl.innerHTML = `<span class="text-red-600">❌ Pola "${pattern}" tidak ditemukan dalam teks!</span>`;
+            }
+            
+            patternSearchInProgress = false;
+            return -1;
+        }
+
+        document.getElementById('startPatternSearch').addEventListener('click', function() {
+            if (patternSearchInProgress) return;
+            
+            const text = document.getElementById('textInput').value.toUpperCase();
+            const pattern = document.getElementById('patternInput').value.toUpperCase();
+            
+            if (!text || !pattern) {
+                alert('Harap isi teks dan pola!');
+                return;
+            }
+            
+            if (pattern.length > text.length) {
+                alert('Pola tidak boleh lebih panjang dari teks!');
+                return;
+            }
+            
+            patternSearchInProgress = true;
+            document.getElementById('patternResult').innerHTML = '';
+            createTextVisualization(text);
+            createPatternVisualization(pattern);
+            bruteForcePatternSearch(text, pattern);
+        });
+
+        document.getElementById('resetPatternSearch').addEventListener('click', function() {
+            patternSearchInProgress = false;
+            document.getElementById('textVisualization').innerHTML = '';
+            document.getElementById('patternVisualization').innerHTML = '';
+            document.getElementById('patternStatus').textContent = 'Siap untuk memulai pencarian pola...';
+            document.getElementById('patternResult').innerHTML = '';
+        });
+
+        // Selection Sort Visualization
+        function createSortVisualization(array) {
+            const container = document.getElementById('sortVisualization');
+            container.innerHTML = '';
+            
+            array.forEach((num, index) => {
+                const element = document.createElement('div');
+                element.className = 'array-element inline-block bg-orange-200 border-2 border-orange-300 p-4 m-2 rounded text-center font-bold text-lg';
+                element.id = `sort-element-${index}`;
+                element.textContent = num;
+                container.appendChild(element);
+            });
+        }
+
+        async function selectionSort(array) {
+            const statusEl = document.getElementById('sortStatus');
+            const resultEl = document.getElementById('sortResult');
+            let swaps = 0;
+            
+            for (let i = 0; i < array.length - 1; i++) {
+                if (!sortInProgress) break;
+                
+                let minIndex = i;
+                
+                // Highlight current position
+                const currentEl = document.getElementById(`sort-element-${i}`);
+                currentEl.classList.add('checking');
+                
+                statusEl.textContent = `Mencari elemen terkecil dari posisi ${i}...`;
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                
+                // Find minimum element
+                for (let j = i + 1; j < array.length; j++) {
+                    if (!sortInProgress) break;
+                    
+                    const compareEl = document.getElementById(`sort-element-${j}`);
+                    compareEl.classList.add('checking');
+                    
+                    statusEl.textContent = `Membandingkan ${array[minIndex]} dengan ${array[j]}...`;
+                    await new Promise(resolve => setTimeout(resolve, 600));
+                    
+                    if (array[j] < array[minIndex]) {
+                        // Remove previous minimum highlighting
+                        if (minIndex !== i) {
+                            document.getElementById(`sort-element-${minIndex}`).classList.remove('found');
+                        }
+                        minIndex = j;
+                        compareEl.classList.add('found');
+                        statusEl.textContent = `${array[j]} lebih kecil! Minimum baru di posisi ${j}`;
+                    }
+                    
+                    compareEl.classList.remove('checking');
+                    await new Promise(resolve => setTimeout(resolve, 400));
+                }
+                
+                // Swap if needed
+                if (minIndex !== i) {
+                    swaps++;
+                    statusEl.textContent = `Menukar ${array[i]} dengan ${array[minIndex]}...`;
+                    
+                    const temp = array[i];
+                    array[i] = array[minIndex];
+                    array[minIndex] = temp;
+                    
+                    // Update visualization
+                    document.getElementById(`sort-element-${i}`).textContent = array[i];
+                    document.getElementById(`sort-element-${minIndex}`).textContent = array[minIndex];
+                    
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                }
+                
+                // Mark as sorted
+                currentEl.classList.remove('checking');
+                currentEl.classList.add('found');
+                
+                if (minIndex !== i) {
+                    document.getElementById(`sort-element-${minIndex}`).classList.remove('found');
+                }
+                
+                statusEl.textContent = `Posisi ${i} sudah benar: ${array[i]}`;
+                await new Promise(resolve => setTimeout(resolve, 500));
+            }
+            
+            if (sortInProgress) {
+                // Mark last element as sorted
+                document.getElementById(`sort-element-${array.length - 1}`).classList.add('found');
+                
+                statusEl.textContent = `Pengurutan selesai!`;
+                resultEl.innerHTML = `<span class="text-green-600">✅ Array berhasil diurutkan dengan ${swaps} penukaran!</span>`;
+            }
+            
+            sortInProgress = false;
+        }
+
+        document.getElementById('startSort').addEventListener('click', function() {
+            if (sortInProgress) return;
+            
+            const arrayInput = document.getElementById('sortArrayInput').value;
+            
+            if (!arrayInput) {
+                alert('Harap isi array!');
+                return;
+            }
+            
+            try {
+                const array = arrayInput.split(',').map(num => parseInt(num.trim()));
+                
+                if (array.some(isNaN)) {
+                    alert('Harap masukkan angka yang valid!');
+                    return;
+                }
+                
+                sortInProgress = true;
+                document.getElementById('sortResult').innerHTML = '';
+                createSortVisualization(array);
+                selectionSort(array);
+                
+            } catch (error) {
+                alert('Format input tidak valid!');
+            }
+        });
+
+        document.getElementById('resetSort').addEventListener('click', function() {
+            sortInProgress = false;
+            document.getElementById('sortVisualization').innerHTML = '';
+            document.getElementById('sortStatus').textContent = 'Siap untuk memulai pengurutan...';
+            document.getElementById('sortResult').innerHTML = '';
+        });
+
+        // Character Combination Simulation
+        async function generateCombinations(charset, target) {
+            const statusEl = document.getElementById('comboStatus');
+            const resultEl = document.getElementById('comboResult');
+            const currentEl = document.getElementById('currentCombo');
+            
+            let attempts = 0;
+            const totalPossible = charset.length * charset.length;
+            
+            for (let i = 0; i < charset.length; i++) {
+                for (let j = 0; j < charset.length; j++) {
+                    if (!comboInProgress) break;
+                    
+                    attempts++;
+                    const combination = charset[i] + charset[j];
+                    
+                    currentEl.textContent = combination;
+                    statusEl.textContent = `Mencoba kombinasi ${attempts}/${totalPossible}: ${combination}`;
+                    
+                    await new Promise(resolve => setTimeout(resolve, 50));
+                    
+                    if (combination === target) {
+                        statusEl.textContent = `Kombinasi ditemukan!`;
+                        resultEl.innerHTML = `<span class="text-green-600">✅ Target "${target}" ditemukan setelah ${attempts} dari ${totalPossible} kemungkinan!</span>`;
+                        comboInProgress = false;
+                        return combination;
+                    }
+                }
+                if (!comboInProgress) break;
+            }
+            
+            if (comboInProgress) {
+                statusEl.textContent = `Target tidak ditemukan.`;
+                resultEl.innerHTML = `<span class="text-red-600">❌ Target "${target}" tidak ditemukan dalam ${totalPossible} kemungkinan!</span>`;
+            }
+            
+            comboInProgress = false;
+            return null;
+        }
+
+        function updateTotalCombinations() {
+            const charset = document.getElementById('charsetSelect').value;
+            const total = charset.length * charset.length;
+            document.getElementById('totalCombos').textContent = total.toLocaleString();
+        }
+
+        document.getElementById('charsetSelect').addEventListener('change', updateTotalCombinations);
+
+        document.getElementById('startCombo').addEventListener('click', function() {
+            if (comboInProgress) return;
+            
+            const charset = document.getElementById('charsetSelect').value;
+            const target = document.getElementById('comboTarget').value.toUpperCase();
+            
+            if (!target || target.length !== 2) {
+                alert('Harap masukkan target 2 karakter!');
+                return;
+            }
+            
+            // Check if target is valid for selected charset
+            for (let char of target) {
+                if (!charset.includes(char)) {
+                    alert(`Karakter "${char}" tidak ada dalam charset yang dipilih!`);
+                    return;
+                }
+            }
+            
+            comboInProgress = true;
+            document.getElementById('comboResult').innerHTML = '';
+            generateCombinations(charset, target);
+        });
+
+        document.getElementById('resetCombo').addEventListener('click', function() {
+            comboInProgress = false;
+            document.getElementById('comboStatus').textContent = 'Siap untuk memulai simulasi...';
+            document.getElementById('currentCombo').textContent = '--';
+            document.getElementById('comboResult').innerHTML = '';
+        });
+
+        // Initialize visualizations with default values
+        document.addEventListener('DOMContentLoaded', function() {
+            const defaultArray = [5, 12, 3, 8, 20];
+            createArrayVisualization(defaultArray);
+            
+            const defaultText = "HELLO WORLD";
+            const defaultPattern = "WORLD";
+            createTextVisualization(defaultText);
+            createPatternVisualization(defaultPattern);
+            
+            const defaultSortArray = [64, 34, 25, 12, 22, 11, 90];
+            createSortVisualization(defaultSortArray);
+            
+            updateTotalCombinations();
+        });
+    </script>
+</body>
+</html>
